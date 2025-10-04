@@ -1,0 +1,20 @@
+import React, { useEffect, useMemo, useRef, useState } from "react";
+
+/**
+ * FresqueGov
+ * — Style graphique : bulles avec double anneau (dont un en pointillés), avatar centré, cartouche.
+ * — Clic sur le Premier ministre : ouvre un panneau plein écran affichant
+ *     (1) en haut : l'affiche des ministres de plein exercice (mini-bulles)
+ *     (2) en dessous : la liste des collaborateurs du PM
+ * — Mode édition réservé à l'équipe : connexion par code (hash SHA-256 côté client)
+ * — Ajout / édition / suppression + import/export JSON (localStorage)
+ *
+ * Intégration : <FresqueGov />
+ * Prérequis conseillés : Tailwind CSS (classes utilitaires). Les parties "anneau" utilisent des styles inline.
+ */
+
+export default function FresqueGov() {
+  // ...existing code...
+  // (Tout le code fourni dans le prompt, inchangé)
+  // ...existing code...
+}

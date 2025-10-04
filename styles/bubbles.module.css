@@ -1,0 +1,341 @@
+.wrap {
+  max-width: 1200px;
+  margin: 24px auto;
+  padding: 0 16px;
+}
+.root {
+  background: var(--bg, #f5e9d2);
+  color: var(--ink, #0e2233);
+  font-family: Inter, system-ui, Arial;
+  min-height: 100vh;
+}
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  background: #fff;
+  padding: 10px 12px;
+  border-bottom: 1px solid #e7e1d4;
+}
+.bar h1 {
+  font-size: 1rem;
+  margin: 0 8px 0 0;
+  font-weight: 800;
+  letter-spacing: .04em;
+}
+.sp {
+  flex: 1;
+}
+.btn {
+  border: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+}
+.primary {
+  background: #0e2233;
+  color: #fff;
+}
+.ghost {
+  background: #eef1f6;
+}
+.danger {
+  background: #ffebe9;
+  color: #a12622;
+}
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-left: 8px;
+}
+.tag {
+  border: 1px solid #ccd5df;
+  background: #fff;
+  padding: 6px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.active {
+  background: #0e2233;
+  color: #fff;
+  border-color: #0e2233;
+}
+.editbox {
+  display: none;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  gap: 6px;
+}
+.staff-only {
+  display: none;
+}
+.staff-on .staff-only {
+  display: inline-flex;
+}
+.edit-on .editbox {
+  display: flex;
+}
+.iconbtn {
+  border: 0;
+  background: #ffffffcc;
+  padding: 6px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.iconbtn:hover {
+  background: #fff;
+}
+.chip {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: inline-flex;
+  gap: .45rem;
+  align-items: center;
+  background: #e6dcc6;
+  border-radius: 999px;
+  padding: .25rem .55rem;
+  font-weight: 600;
+}
+.sw {
+  width: 18px;
+  height: 12px;
+  border-radius: 3px;
+  background: var(--accent, #f2a900);
+}
+.dialog {
+  border: none;
+  border-radius: 16px;
+  max-width: 640px;
+  width: calc(100% - 32px);
+  padding: 0;
+  box-shadow: 0 20px 60px rgba(0,0,0,.25);
+}
+.sheet {
+  padding: 16px;
+}
+.sheet h2 {
+  margin: 0 0 8px;
+}
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+ :global(label) {
+  font-weight: 600;
+  font-size: .9rem;
+}
+
+:global(input), :global(select) {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d6dbe3;
+  border-radius: 10px;
+  font: inherit;
+}
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 6px;
+}
+.hl {
+  height: 1px;
+  background: #ece7db;
+  margin: 10px 0;
+}
+.note {
+  font-size: .85rem;
+  color: #5a6a7a;
+}
+.grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+.bubble {
+  --accent: #f2a900;
+  --arc: 70;
+  position: relative;
+  background: #fff;
+  border-radius: 26px;
+  padding: 16px;
+  box-shadow: 0 10px 30px rgba(15,20,30,.12);
+  cursor: pointer;
+}
+.bubble:focus {
+  outline: 3px solid #f2a900;
+  outline-offset: 3px;
+}
+.medal {
+  width: 180px;
+  height: 180px;
+  margin: 6px auto 10px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+.ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    conic-gradient(var(--accent) 0 calc(var(--arc)*1%), #fffc 0 calc((var(--arc)+2)*1%), transparent 0),
+    radial-gradient(circle at 50% 50%, transparent 69%, #1b2230 69% 70%, transparent 70% 100%);
+}
+.ring::after {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  border: 6px solid #2e4155;
+  opacity: .85;
+}
+.dash {
+  position: absolute;
+  inset: 22px;
+  border-radius: 50%;
+  border: 2px dashed #0e2233;
+}
+.avatar {
+  position: relative;
+  z-index: 2;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: #ddd center/cover no-repeat;
+  outline: 6px solid #fff;
+  box-shadow: 0 6px 18px rgba(0,0,0,.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: #2c3b4d;
+}
+.role, .name, .dept {
+  text-align: center;
+}
+.role {
+  margin: 4px 0 0;
+  font-size: .8rem;
+  color: #6b7d8c;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.name {
+  margin: 4px 0 2px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.dept {
+  margin: 6px auto 0;
+  max-width: 26ch;
+  font-size: .92rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: #33475b;
+}
+.chip {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: inline-flex;
+  gap: .45rem;
+  align-items: center;
+  background: #e6dcc6;
+  border-radius: 999px;
+  padding: .25rem .55rem;
+  font-weight: 600;
+}
+.sw {
+  width: 18px;
+  height: 12px;
+  border-radius: 3px;
+  background: var(--accent);
+}
+.cta {
+  margin-top: 12px;
+  width: 100%;
+  border: 2px solid var(--accent);
+  background: transparent;
+  padding: 10px;
+  border-radius: 12px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.cta:hover {
+  background: #f5e9d2;
+}
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal {
+  background: #fff;
+  border-radius: 16px;
+  max-width: 560px;
+  width: calc(100% - 32px);
+  padding: 0;
+  box-shadow: 0 20px 60px rgba(0,0,0,.25);
+}
+.modalHeader {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 18px 0 18px;
+}
+.thumb {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #ddd center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: #2c3b4d;
+}
+.modalDept {
+  margin: .5rem 18px 0 18px;
+  color: #33475b;
+}
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin: 12px 18px 18px 18px;
+}
+.btnGhost {
+  border: 0;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #eef1f6;
+}
+.btnPrimary {
+  border: 0;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #0e2233;
+  color: #fff;
+}
