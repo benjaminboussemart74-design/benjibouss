@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Baromètre Ifop d'octobre</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&family=Playfair+Display:wght@700;900&display=swap">
+<style>
+/* Mise en page : colonne éditoriale unique, sections séparées par des filets, filet rouge sous l'en-tête */
+:root {
+  --bg: #FAFAF8; --bg-card: #FFFFFF; --bg-sidebar: #F2F2EE; --bg-hover: #EEEEE9;
+  --border: #DDDDD6; --border-mid: #B8B8B0; --border-dark: #2B2B2B;
+  --text: #1A1A1A; --text-secondary: #595959; --text-muted: #8A8A82;
+  --accent: #1B3F7B; --accent-light: #EEF2FA;
+  --red: #B01E28; --red-light: #FAF0F1;
+  --green-leg: #1A7A4C; --green-light: #EDFAF3;
+  --amber-com: #A86A12; --amber-light: #FFF8ED;
+  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  /* Couleurs partisanes (dataviz uniquement) */
+  --c-lo: #8B1A1A; --c-lfi: #E8333A; --c-pcf: #9E1B32; --c-dvg: #C75B7A; --c-eelv: #00A86B;
+  --c-ps: #ED6F8B; --c-ren: #3366CC; --c-hor: #5B8FBF; --c-hs: #8C7AA9; --c-lr: #1B3A6B;
+  --c-dvd: #6B8EB5; --c-dlf: #8A7A5A; --c-rn: #0A1833; --c-rec: #6B4E3D; --c-aut: #9A9A92;
+  --b-gauche: #E8333A; --b-centre: #FF8C42; --b-droite: #3D6FB0; --b-extd: #0A1833; --b-aut: #B8B8B0;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #141413; --bg-card: #1C1C1A; --bg-sidebar: #232320; --bg-hover: #2B2B28;
+  --border: #383833; --border-mid: #55554F; --border-dark: #D8D8D0;
+  --text: #EDEDE8; --text-secondary: #B8B8B0; --text-muted: #8C8C84;
+  --accent: #8FA9E0; --accent-light: #1F2A40; --red: #E0545C; --red-light: #3A1E20;
+  --green-leg: #4CC08A; --green-light: #16291F; --amber-com: #E0A54A; --amber-light: #2E2414;
+  --c-lo: #D06060; --c-pcf: #D2465C; --c-lr: #6F8FCB; --c-rn: #A9B8E6; --c-rec: #B08A70; --c-dlf: #B5A57E;
+  --b-extd: #A9B8E6; --b-droite: #5B8FD6;
+  color-scheme: dark;
+} }
+:root[data-theme="dark"] {
+  --bg: #141413; --bg-card: #1C1C1A; --bg-sidebar: #232320; --bg-hover: #2B2B28;
+  --border: #383833; --border-mid: #55554F; --border-dark: #D8D8D0;
+  --text: #EDEDE8; --text-secondary: #B8B8B0; --text-muted: #8C8C84;
+  --accent: #8FA9E0; --accent-light: #1F2A40; --red: #E0545C; --red-light: #3A1E20;
+  --green-leg: #4CC08A; --green-light: #16291F; --amber-com: #E0A54A; --amber-light: #2E2414;
+  --c-lo: #D06060; --c-pcf: #D2465C; --c-lr: #6F8FCB; --c-rn: #A9B8E6; --c-rec: #B08A70; --c-dlf: #B5A57E;
+  --b-extd: #A9B8E6; --b-droite: #5B8FD6;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font-sans); font-size: 15px; line-height: 1.6; }
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.gutter { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 940px; margin: 0 auto; }
+
+header.top { background: var(--bg-card); border-bottom: 1px solid var(--border); }
+header.top .wrap { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-block: 15px; flex-wrap: wrap; }
+.brand { font-family: var(--font-serif); font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em; }
+.brand span { color: var(--red); }
+.meta { font-size: 11px; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; }
+.filet { height: 3px; background: var(--red); }
+
+.label { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin: 0; }
+h1 { font-family: var(--font-serif); font-weight: 900; font-size: clamp(1.75rem, 4.6vw, 2.4rem); letter-spacing: -0.02em; line-height: 1.15; margin: 8px 0 14px; text-wrap: balance; }
+h2 { font-family: var(--font-serif); font-weight: 700; font-size: clamp(1.25rem, 3vw, 1.5rem); letter-spacing: -0.02em; line-height: 1.15; margin: 6px 0 10px; text-wrap: balance; }
+.lede { color: var(--text-secondary); max-width: 66ch; margin: 0; }
+p.note { font-size: 12px; color: var(--text-muted); margin: 10px 0 0; max-width: 72ch; }
+
+section { padding-block: 36px; border-top: 1px solid var(--border); }
+section.hero { border-top: 0; padding-block: 32px 28px; }
+.intro { color: var(--text-secondary); max-width: 68ch; margin: 0 0 20px; }
+
+.kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 24px; }
+.kpi { background: var(--bg-card); padding: 14px 16px; min-width: 0; }
+.kpi .v { font-family: var(--font-mono); font-weight: 700; font-size: 26px; letter-spacing: -0.02em; margin: 4px 0 2px; white-space: nowrap; }
+.kpi .d { font-size: 12px; color: var(--text-muted); margin: 0; }
+@media (max-width: 720px) { .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } .kpi .v { font-size: 22px; } }
+
+.cards3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.cards3 > div { background: var(--bg-card); padding: 16px; min-width: 0; }
+.cards3 h3 { font-size: 13px; font-weight: 600; margin: 4px 0 6px; }
+.cards3 p { font-size: 13px; color: var(--text-secondary); margin: 0; }
+@media (max-width: 720px) { .cards3 { grid-template-columns: 1fr; } }
+
+.panel { background: var(--bg-card); border: 1px solid var(--border); padding: 20px; margin-top: 16px; min-width: 0; }
+.panel h3 { font-family: var(--font-sans); font-size: 14px; font-weight: 600; margin: 4px 0 4px; }
+.panel .sub { font-size: 12px; color: var(--text-muted); margin: 0 0 16px; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { background: transparent; border: 1px solid var(--border-mid); border-radius: 2px; color: var(--text-secondary); font: 500 12px/1.3 var(--font-sans); padding: 7px 11px; cursor: pointer; transition: border-color .15s, color .15s, background .15s; text-align: left; }
+.chip:hover { border-color: var(--text); color: var(--text); }
+.chip[aria-pressed="true"] { background: var(--accent-light); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+.chip:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.chip .n { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); margin-right: 6px; }
+
+.hdesc { margin: 14px 0 0; padding: 10px 14px; background: var(--accent-light); border-left: 3px solid var(--accent); font-size: 13px; color: var(--text-secondary); }
+.hdesc b { color: var(--accent); font-weight: 600; }
+
+/* Barres horizontales */
+.bars { display: grid; gap: 10px; }
+.bar-row { display: grid; grid-template-columns: minmax(120px, 190px) minmax(0, 1fr) 56px; gap: 12px; align-items: center; }
+.bar-name { font-size: 13px; font-weight: 500; line-height: 1.25; min-width: 0; }
+.bar-name small { display: block; font-weight: 400; font-size: 11px; color: var(--text-muted); }
+.track { position: relative; height: 10px; background: var(--bg-sidebar); }
+.fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 0 3px 3px 0; transition: width .5s cubic-bezier(0.22, 1, 0.36, 1); }
+.bar-val { font-family: var(--font-mono); font-weight: 600; font-size: 13px; text-align: right; font-variant-numeric: tabular-nums; }
+.bar-row.lead .bar-name { font-weight: 600; }
+@media (max-width: 520px) { .bar-row { grid-template-columns: minmax(96px, 120px) minmax(0, 1fr) 48px; gap: 8px; } }
+@media (prefers-reduced-motion: reduce) { .fill, .seg { transition: none !important; } }
+
+/* Blocs */
+.stack { display: flex; height: 26px; gap: 2px; }
+.seg { height: 100%; transition: flex-basis .5s cubic-bezier(0.22, 1, 0.36, 1); min-width: 2px; }
+.stack-legend { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 12px; }
+.stack-legend div { display: flex; align-items: baseline; gap: 7px; font-size: 13px; }
+.sw { width: 10px; height: 10px; display: inline-block; flex-shrink: 0; transform: translateY(1px); }
+.stack-legend .mono { font-weight: 600; }
+
+/* Intervalles de confiance */
+.ci { display: grid; gap: 4px; }
+.ci-row { display: grid; grid-template-columns: minmax(120px, 190px) minmax(0, 1fr) 96px; gap: 12px; align-items: center; height: 26px; }
+.ci-plot { position: relative; height: 100%; }
+.ci-grid { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--border); }
+.ci-band { position: absolute; top: 9px; height: 8px; opacity: .3; }
+.ci-dot { position: absolute; top: 7px; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; border: 2px solid var(--bg-card); }
+.ci-val { font-size: 11px; color: var(--text-secondary); text-align: right; white-space: nowrap; }
+.ci-axis { position: relative; height: 18px; font-size: 10px; color: var(--text-muted); }
+.ci-axis span { position: absolute; transform: translateX(-50%); font-family: var(--font-mono); }
+.ci-row.tie .ci-name { color: var(--amber-com); }
+@media (max-width: 520px) { .ci-row { grid-template-columns: minmax(84px, 110px) minmax(0, 1fr) 74px; gap: 8px; } .ci-val { font-size: 10px; } }
+
+.alert { padding: 10px 14px; border-left: 3px solid; margin-top: 14px; }
+.alert p { margin: 0; font-size: 13px; color: var(--text-secondary); }
+.alert p.t { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+.alert.amber { background: var(--amber-light); border-color: var(--amber-com); } .alert.amber .t { color: var(--amber-com); }
+.alert.accent { background: var(--accent-light); border-color: var(--accent); } .alert.accent .t { color: var(--accent); }
+.alert.red { background: var(--red-light); border-color: var(--red); } .alert.red .t { color: var(--red); }
+
+/* Graphique SVG */
+.chart { position: relative; width: 100%; }
+.chart svg { display: block; width: 100%; overflow: visible; }
+.chart text { font-family: var(--font-sans); }
+.tip { position: absolute; pointer-events: none; background: var(--bg-card); border: 1px solid var(--border-mid); padding: 8px 10px; font-size: 12px; min-width: 170px; z-index: 5; }
+.tip .h { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+.tip .r { display: flex; align-items: center; gap: 8px; line-height: 1.7; }
+.tip .r i { width: 12px; height: 2px; display: inline-block; flex-shrink: 0; }
+.tip .r b { font-family: var(--font-mono); font-weight: 600; min-width: 42px; }
+.tip .r span { color: var(--text-secondary); }
+
+/* Fourchettes selon scénario */
+.range-row { display: grid; grid-template-columns: minmax(120px, 190px) minmax(0, 1fr) 84px; gap: 12px; align-items: center; height: 28px; }
+.range-plot { position: relative; height: 100%; }
+.range-line { position: absolute; top: 13px; height: 2px; }
+.range-dot { position: absolute; top: 9px; width: 10px; height: 10px; margin-left: -5px; border-radius: 50%; background: var(--bg-card); border: 2px solid; }
+.range-dot.sel { width: 14px; height: 14px; margin-left: -7px; top: 7px; border-width: 0; }
+.range-val { font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-align: right; white-space: nowrap; }
+@media (max-width: 520px) { .range-row { grid-template-columns: minmax(84px, 110px) minmax(0, 1fr) 70px; gap: 8px; } }
+
+/* Second tour */
+.duel { display: grid; gap: 6px; padding-block: 12px; border-bottom: 1px solid var(--border); }
+.duel:last-child { border-bottom: 0; }
+.duel-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-size: 13px; }
+.duel-top .who { font-weight: 600; }
+.duel-bar { position: relative; display: flex; height: 22px; gap: 2px; }
+.duel-bar > div { height: 100%; display: flex; align-items: center; font: 600 12px var(--font-mono); padding: 0 8px; color: #FFFFFF; }
+.duel-bar .mid { position: absolute; left: 50%; top: -4px; bottom: -4px; width: 1px; background: var(--border-dark); padding: 0; }
+.duel-meta { font-size: 12px; color: var(--text-muted); display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.trend-down { color: var(--red); font-family: var(--font-mono); font-weight: 500; }
+.trend-up { color: var(--green-leg); font-family: var(--font-mono); font-weight: 500; }
+
+.takeaways { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.takeaways > div { background: var(--bg-card); padding: 16px 18px; min-width: 0; }
+.takeaways .k { font-family: var(--font-mono); font-weight: 700; font-size: 22px; letter-spacing: -0.02em; }
+.takeaways p { margin: 4px 0 0; font-size: 13px; color: var(--text-secondary); }
+@media (max-width: 720px) { .takeaways { grid-template-columns: 1fr; } }
+
+.lex { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 8px 16px; font-size: 13px; margin: 0; }
+.lex dt { font-weight: 600; }
+.lex dd { margin: 0; color: var(--text-secondary); }
+@media (max-width: 520px) { .lex { grid-template-columns: 1fr; gap: 2px; } .lex dd { margin-bottom: 8px; } }
+
+footer.source { background: var(--bg-sidebar); border-top: 1px solid var(--border); }
+footer.source .wrap { padding-block: 14px; font-size: 11px; color: var(--text-muted); }
+footer.source p { margin: 0 0 4px; }
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap gutter">
+  <div class="brand">Présidentielle <span>2027</span></div>
+  <div class="meta">Baromètre Ifop-Fiducial · vague 7 · octobre 2026</div>
+</div></header>
+<div class="filet"></div>
+
+<main>
+<section class="hero"><div class="wrap gutter">
+  <p class="label">Intentions de vote · Enquête du 17 au 19 octobre 2026</p>
+  <h1>Marine Le Pen en tête dans les huit scénarios : qui pourrait l'affronter ?</h1>
+  <p class="lede">L'Ifop a testé huit listes de candidats possibles pour le premier tour et cinq duels pour le second. Dans tous les cas, Marine Le Pen arrive première au premier tour et gagne le second. Derrière elle, Jean-Luc Mélenchon, Raphaël Glucksmann et Édouard Philippe sont, dans la plupart des scénarios, trop proches pour être départagés.</p>
+  <div class="kpis">
+    <div class="kpi"><p class="label">Le Pen · 1er tour</p><p class="v" id="k1"></p><p class="d">Selon les 8 scénarios</p></div>
+    <div class="kpi"><p class="label">Deuxième place</p><p class="v" id="k2"></p><p class="d">Meilleur score du 2e selon le scénario</p></div>
+    <div class="kpi"><p class="label">Le Pen · 2nd tour</p><p class="v" id="k3"></p><p class="d">Gagnante dans les 5 duels</p></div>
+    <div class="kpi"><p class="label">Personnes interrogées</p><p class="v" id="k4"></p><p class="d">Inscrites sur les listes électorales</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap gutter">
+  <p class="label">Mode d'emploi</p>
+  <h2>Comment lire ce sondage en trois notions</h2>
+  <div class="cards3">
+    <div><p class="label">01 · Les hypothèses</p><h3>Plusieurs listes de candidats</h3><p>Les candidatures ne sont pas encore connues. L'Ifop pose donc la même question avec des listes différentes (par exemple, Philippe seul au centre, ou Philippe et Attal ensemble). Chaque liste est un « scénario » : les chiffres ne s'additionnent pas d'un scénario à l'autre.</p></div>
+    <div><p class="label">02 · Les suffrages exprimés</p><h3>Seuls ceux qui choisissent comptent</h3><p>Les pourcentages sont calculés uniquement parmi les personnes qui expriment un choix. Les indécis, les abstentionnistes et les votes blancs sont écartés, comme le soir de l'élection. Chaque colonne fait donc toujours 100 %.</p></div>
+    <div><p class="label">03 · La marge d'erreur</p><h3>Un chiffre est une fourchette</h3><p>Interroger 1 928 personnes plutôt que 49 millions d'électeurs crée une incertitude. Un score de 36 % signifie en réalité « probablement entre 34 et 38 % ». Deux candidats dont les fourchettes se chevauchent ne peuvent pas être départagés.</p></div>
+  </div>
+</div></section>
+
+<section id="premier-tour"><div class="wrap gutter">
+  <p class="label">Premier tour · Huit scénarios</p>
+  <h2>Choisissez un scénario pour voir le rapport de force</h2>
+  <p class="intro">Le sélecteur ci-dessous pilote les trois graphiques de cette partie : les scores, l'équilibre entre les grandes familles politiques et la marge d'erreur.</p>
+  <div class="chips" id="hypChips" role="group" aria-label="Scénarios de premier tour"></div>
+  <div class="hdesc" id="hypDesc"></div>
+
+  <div class="panel">
+    <p class="label">Scores du scénario</p>
+    <h3 id="barsTitle">Intentions de vote au premier tour</h3>
+    <p class="sub">En pourcentage des suffrages exprimés</p>
+    <div class="bars" id="bars"></div>
+  </div>
+
+  <div class="panel">
+    <p class="label">Familles politiques</p>
+    <h3>Combien pèse chaque camp ?</h3>
+    <p class="sub">Addition des candidats de chaque famille dans ce scénario. Le classement des candidats par famille est un choix de lecture, pas une donnée de l'Ifop.</p>
+    <div class="stack" id="stack" role="img"></div>
+    <div class="stack-legend" id="stackLegend"></div>
+  </div>
+
+  <div class="panel">
+    <p class="label">Marge d'erreur</p>
+    <h3>Le duel pour la deuxième place est indécis</h3>
+    <p class="sub">Le point est le score mesuré ; la bande est l'intervalle dans lequel le vrai score se situe avec 95 % de chances. Les noms en orange ont une fourchette qui chevauche celle du deuxième : impossible de les départager.</p>
+    <div class="ci" id="ci"></div>
+    <p class="note">Calcul à partir de 1 928 personnes, selon la formule utilisée dans le tableau de l'Ifop. Le nombre de suffrages exprimés est un peu plus faible, la marge réelle est donc légèrement plus large.</p>
+  </div>
+</div></section>
+
+<section id="scenarios"><div class="wrap gutter">
+  <p class="label">D'un scénario à l'autre</p>
+  <h2>Le socle de Marine Le Pen ne bouge presque pas, celui des autres oui</h2>
+  <p class="intro">Chaque point représente le score d'un candidat dans un scénario. Plus la ligne est longue, plus le candidat dépend de la présence ou de l'absence de ses concurrents. Le point plein correspond au scénario choisi plus haut.</p>
+  <div class="panel">
+    <div id="ranges"></div>
+    <div class="ci-axis" id="rangeAxis"></div>
+  </div>
+  <div class="alert accent"><p class="t">Ce que cela signifie</p><p>Gabriel Attal passe de 4 % à 13 % selon qu'Édouard Philippe est candidat ou non : les deux se disputent le même électorat. Jean-Luc Mélenchon gagne jusqu'à 5 points quand la gauche compte moins de candidats.</p></div>
+</div></section>
+
+<section id="evolution"><div class="wrap gutter">
+  <p class="label">Évolution · Septembre 2025 à octobre 2026</p>
+  <h2>Édouard Philippe a perdu six points depuis septembre</h2>
+  <p class="intro">L'Ifop repose les mêmes scénarios à chaque vague, ce qui permet de suivre les tendances. Survolez le graphique pour lire les scores à chaque date.</p>
+  <div class="chips" id="evoChips" role="group" aria-label="Scénario suivi dans le temps"></div>
+  <div class="panel">
+    <h3 id="evoTitle"></h3>
+    <p class="sub">En pourcentage des suffrages exprimés. Les vagues sont espacées régulièrement sur l'axe, alors que leurs dates ne le sont pas.</p>
+    <div class="chart" id="evoChart"></div>
+  </div>
+</div></section>
+
+<section id="second-tour"><div class="wrap gutter">
+  <p class="label">Second tour · Cinq duels testés</p>
+  <h2>Aucun adversaire ne bat Marine Le Pen, et tous reculent depuis l'été</h2>
+  <p class="intro">Le filet vertical marque la barre des 50 %. Le chiffre en rouge indique l'évolution du challenger par rapport à la vague d'août 2026.</p>
+  <div class="panel" id="duels"></div>
+  <div class="alert amber"><p class="t">À six mois du scrutin, prudence</p><p>L'Ifop rappelle qu'un sondage mesure l'état de l'opinion au moment de l'enquête et ne prédit pas le résultat. Les candidatures, les alliances et la campagne peuvent encore modifier ces équilibres.</p></div>
+</div></section>
+
+<section id="retenir"><div class="wrap gutter">
+  <p class="label">À retenir</p>
+  <h2>Quatre enseignements de la vague d'octobre</h2>
+  <div class="takeaways">
+    <div><div class="k mono">36&nbsp;%</div><p>Marine Le Pen gagne 3 points depuis août dans le scénario principal et atteint son plus haut niveau du baromètre (38 % dans deux scénarios).</p></div>
+    <div><div class="k mono">15–20&nbsp;%</div><p>C'est le score du deuxième selon le scénario. Mélenchon, Glucksmann et Philippe se disputent cette place, le plus souvent à l'intérieur de la marge d'erreur.</p></div>
+    <div><div class="k mono">−6&nbsp;pts</div><p>Édouard Philippe recule de 21 % à 15 % entre fin septembre et mi-octobre dans le scénario où il est seul au centre.</p></div>
+    <div><div class="k mono">56–68&nbsp;%</div><p>Au second tour, son adversaire le plus solide est Édouard Philippe (44 %), le plus faible Jean-Luc Mélenchon (32 %).</p></div>
+  </div>
+  <div class="panel">
+    <p class="label">Petit lexique</p>
+    <dl class="lex">
+      <dt>Échantillon</dt><dd>Groupe de personnes interrogées : ici 2 081 adultes, dont 1 928 inscrits sur les listes électorales.</dd>
+      <dt>Méthode des quotas</dt><dd>L'échantillon reproduit la population française (sexe, âge, profession, région, taille de la commune), comme une maquette à échelle réduite.</dd>
+      <dt>Auto-administré en ligne</dt><dd>Les personnes répondent seules sur internet, sans enquêteur.</dd>
+      <dt>Vague</dt><dd>Chaque nouvelle édition d'un baromètre. Octobre 2026 est la septième.</dd>
+    </dl>
+  </div>
+</div></section>
+</main>
+
+<footer class="source"><div class="wrap gutter">
+  <p>Source : Ifop-Fiducial pour LCI, Le Figaro et Sud Radio, « Baromètre de l'élection présidentielle, vague 7 », enquête en ligne du 17 au 19 octobre 2026 auprès de 1 928 inscrits sur les listes électorales (échantillon de 2 081 personnes, méthode des quotas).</p>
+  <p>Infographie de lecture réalisée à partir du rapport. Regroupement par familles politiques et marges d'erreur calculés pour cette page. Données à titre indicatif, ce sondage n'est pas une prédiction.</p>
+</div></footer>
+
+<script>
+const NB = " ";
+const fr = n => n.toLocaleString("fr-FR", { maximumFractionDigits: 1 });
+const pct = n => fr(n) + NB + "%";
+
+const C = {
+  arthaud:   { nom: "Nathalie Arthaud", parti: "LO", c: "--c-lo", bloc: "gauche" },
+  melenchon: { nom: "Jean-Luc Mélenchon", parti: "LFI", c: "--c-lfi", bloc: "gauche" },
+  roussel:   { nom: "Fabien Roussel", parti: "PCF", c: "--c-pcf", bloc: "gauche" },
+  ruffin:    { nom: "François Ruffin", parti: "Divers gauche", c: "--c-dvg", bloc: "gauche" },
+  tondelier: { nom: "Marine Tondelier", parti: "Les Écologistes", c: "--c-eelv", bloc: "gauche" },
+  hollande:  { nom: "François Hollande", parti: "PS", c: "--c-ps", bloc: "gauche" },
+  glucksmann:{ nom: "Raphaël Glucksmann", parti: "Place publique", c: "--c-ps", bloc: "gauche" },
+  attal:     { nom: "Gabriel Attal", parti: "Renaissance", c: "--c-ren", bloc: "centre" },
+  philippe:  { nom: "Édouard Philippe", parti: "Horizons", c: "--c-hor", bloc: "centre" },
+  villepin:  { nom: "Dominique de Villepin", parti: "Divers", c: "--c-hs", bloc: "centre" },
+  retailleau:{ nom: "Bruno Retailleau", parti: "LR", c: "--c-lr", bloc: "droite" },
+  lisnard:   { nom: "David Lisnard", parti: "Divers droite", c: "--c-dvd", bloc: "droite" },
+  nda:       { nom: "Nicolas Dupont-Aignan", parti: "DLF", c: "--c-dlf", bloc: "extd" },
+  lepen:     { nom: "Marine Le Pen", parti: "RN", c: "--c-rn", bloc: "extd" },
+  zemmour:   { nom: "Éric Zemmour", parti: "Reconquête", c: "--c-rec", bloc: "extd" },
+  polony:    { nom: "Natacha Polony", parti: "Souverainiste", c: "--c-aut", bloc: "aut" },
+};
+const BLOCS = [
+  { id: "gauche", nom: "Gauche", c: "--b-gauche" },
+  { id: "centre", nom: "Centre", c: "--b-centre" },
+  { id: "droite", nom: "Droite", c: "--b-droite" },
+  { id: "extd", nom: "Extrême droite et souverainistes de droite", c: "--b-extd" },
+  { id: "aut", nom: "Autre", c: "--b-aut" },
+];
+const col = v => `var(${v})`;
+
+// Rapport Ifop p. 6 à 14 · vague du 17 au 19 octobre 2026
+const H = [
+  { court: "Philippe et Attal", titre: "Philippe et Attal candidats", desc: "Le bloc central part divisé, avec deux candidats.", page: 7,
+    s: { arthaud: .5, melenchon: 16.5, roussel: 3, tondelier: 3, glucksmann: 13.5, attal: 5, philippe: 12, retailleau: 5, nda: 2, lepen: 36, zemmour: 3.5 } },
+  { court: "Philippe seul au centre", titre: "Édouard Philippe seul candidat du bloc central", desc: "Gabriel Attal ne se présente pas.", page: 8,
+    s: { arthaud: .5, melenchon: 16.5, roussel: 2.5, tondelier: 3, glucksmann: 14, philippe: 15, retailleau: 7.5, nda: 1.5, lepen: 36, zemmour: 3.5 } },
+  { court: "Attal seul au centre", titre: "Gabriel Attal seul candidat du bloc central", desc: "Édouard Philippe ne se présente pas.", page: 9,
+    s: { arthaud: .5, melenchon: 16, roussel: 2, tondelier: 3, glucksmann: 16, attal: 13, retailleau: 7, nda: 1.5, lepen: 38, zemmour: 3 } },
+  { court: "Gauche : Mélenchon et Glucksmann", titre: "Mélenchon et Glucksmann seuls candidats de gauche", desc: "Pas de candidat communiste ni écologiste.", page: 10,
+    s: { arthaud: .5, melenchon: 18, glucksmann: 16, philippe: 16, retailleau: 6.5, nda: 2.5, lepen: 37, zemmour: 3.5 } },
+  { court: "Gauche : Mélenchon et Hollande", titre: "Mélenchon et Hollande seuls candidats de gauche", desc: "François Hollande remplace Raphaël Glucksmann.", page: 11,
+    s: { arthaud: .5, melenchon: 20, hollande: 10, attal: 6.5, philippe: 14, retailleau: 6, nda: 2, lepen: 38, zemmour: 3 } },
+  { court: "Ruffin, Villepin et Lisnard", titre: "Ruffin, de Villepin et Lisnard candidats", desc: "Le scénario le plus fragmenté, avec treize candidats.", page: 12,
+    s: { melenchon: 15, roussel: 2, ruffin: 1.5, tondelier: 2.5, glucksmann: 12, attal: 4, philippe: 12, villepin: 1.5, retailleau: 5.5, lisnard: 5.5, nda: 1.5, lepen: 34, zemmour: 3 } },
+  { court: "Lisnard seul à droite", titre: "David Lisnard seul candidat de droite", desc: "David Lisnard remplace Bruno Retailleau.", page: 13,
+    s: { arthaud: .5, melenchon: 15.5, roussel: 2, tondelier: 3, glucksmann: 13, attal: 5, philippe: 13, lisnard: 7, nda: 2, lepen: 36, zemmour: 3 } },
+  { court: "Ruffin et Polony", titre: "Ruffin et Polony candidats", desc: "Deux candidatures supplémentaires à gauche et chez les souverainistes.", page: 14,
+    s: { arthaud: .5, melenchon: 15, roussel: 2, ruffin: 2, tondelier: 3, glucksmann: 12, attal: 6, philippe: 12, retailleau: 6, nda: 2, lepen: 35, zemmour: 3.5, polony: 1 } },
+];
+
+// Historique (p. 7, 8, 9)
+const EVO = [
+  { court: "Philippe seul au centre", titre: "Scénario « Philippe seul candidat du bloc central »",
+    dates: ["Sept. 2025", "Fév. 2026", "Mai", "Juin", "Juil.", "Août", "Sept.", "12-14 oct.", "17-19 oct."],
+    series: { lepen: [33,34,33,32,36,33,33,35,36], philippe: [16,16,19,20,19,18,21,18,15], melenchon: [12,10,13,12,15,17,16,16,16.5], glucksmann: [15,11,11,9,9,12,11,13.5,14], retailleau: [9,11,9,11,8,8,8,6.5,7.5] } },
+  { court: "Attal seul au centre", titre: "Scénario « Attal seul candidat du bloc central »",
+    dates: ["Fév. 2026", "Mai", "Juin", "Juil.", "Août", "Sept.", "12-14 oct.", "17-19 oct."],
+    series: { lepen: [35,32,32,36,34,34,36,38], melenchon: [11,13,13,15,17,15,17,16], glucksmann: [12,11.5,11,12,15,13,16,16], attal: [10,16,15,15,14,15,13,13], retailleau: [12,11.5,14,10,9,10,8,7] } },
+  { court: "Philippe et Attal", titre: "Scénario « Philippe et Attal candidats »",
+    dates: ["Août 2026", "Sept.", "12-14 oct.", "17-19 oct."],
+    series: { lepen: [33,32,34,36], melenchon: [16,15,16,16.5], glucksmann: [11,11,14,13.5], philippe: [14.5,16,14,12], attal: [8,8,6,5], retailleau: [6,7,6.5,5] } },
+];
+
+// Second tour (p. 16 à 21) : score du challenger [juil., août, oct.]
+const DUELS = [
+  { id: "philippe", oct: 44, aout: 48, juil: 46 },
+  { id: "glucksmann", oct: 43, aout: 45 },
+  { id: "attal", oct: 42, aout: 46, juil: 45 },
+  { id: "hollande", oct: 41, aout: 46 },
+  { id: "melenchon", oct: 32, aout: 33, juil: 30 },
+];
+
+const N = 1928;
+const marge = p => 1.96 * Math.sqrt((p / 100) * (1 - p / 100) / N) * 100;
+const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+
+// KPI
+const lp = H.map(h => h.s.lepen);
+document.getElementById("k1").textContent = `${fr(Math.min(...lp))}–${pct(Math.max(...lp))}`;
+const seconds = H.map(h => Object.entries(h.s).filter(([k]) => k !== "lepen").sort((a, b) => b[1] - a[1])[0][1]);
+document.getElementById("k2").textContent = `${fr(Math.min(...seconds))}–${pct(Math.max(...seconds))}`;
+const lp2 = DUELS.map(d => 100 - d.oct);
+document.getElementById("k3").textContent = `${fr(Math.min(...lp2))}–${pct(Math.max(...lp2))}`;
+document.getElementById("k4").textContent = N.toLocaleString("fr-FR");
+
+let sel = 0;
+let selFromHash = 0;
+try { const m = /^#scenario-(\d)$/.exec(location.hash); if (m && +m[1] >= 1 && +m[1] <= H.length) selFromHash = +m[1] - 1; } catch (e) {}
+sel = selFromHash;
+
+// Sélecteur de scénario
+const chips = document.getElementById("hypChips");
+H.forEach((h, i) => {
+  const b = el("button", "chip"); b.type = "button"; b.id = "hyp-" + i;
+  b.append(el("span", "n", String(i + 1)), document.createTextNode(h.court));
+  b.addEventListener("click", () => { sel = i; renderPremierTour(); });
+  chips.append(b);
+});
+
+function sorted(h) { return Object.entries(h.s).sort((a, b) => b[1] - a[1]); }
+
+function renderPremierTour() {
+  const h = H[sel];
+  [...chips.children].forEach((b, i) => b.setAttribute("aria-pressed", String(i === sel)));
+  const d = document.getElementById("hypDesc"); d.textContent = "";
+  d.append(el("b", null, `Scénario ${sel + 1} · ${h.titre}. `), document.createTextNode(`${h.desc} Rapport Ifop, page ${h.page}.`));
+  document.getElementById("barsTitle").textContent = h.titre;
+
+  // Barres
+  const bars = document.getElementById("bars"); bars.textContent = "";
+  const max = 40;
+  sorted(h).forEach(([id, v], i) => {
+    const c = C[id];
+    const row = el("div", "bar-row" + (i === 0 ? " lead" : ""));
+    const name = el("div", "bar-name", c.nom); name.append(el("small", null, c.parti));
+    const track = el("div", "track"); const fill = el("div", "fill");
+    fill.style.width = (v / max * 100) + "%"; fill.style.background = col(c.c);
+    track.append(fill);
+    row.append(name, track, el("div", "bar-val", pct(v)));
+    bars.append(row);
+  });
+
+  // Familles politiques
+  const tot = {}; Object.entries(h.s).forEach(([id, v]) => { const b = C[id].bloc; tot[b] = (tot[b] || 0) + v; });
+  const stack = document.getElementById("stack"); stack.textContent = "";
+  const leg = document.getElementById("stackLegend"); leg.textContent = "";
+  const parts = [];
+  BLOCS.filter(b => tot[b.id]).forEach(b => {
+    const s = el("div", "seg"); s.style.flex = `0 0 calc(${tot[b.id]}% - 2px)`; s.style.background = col(b.c);
+    s.title = `${b.nom} : ${pct(tot[b.id])}`;
+    stack.append(s);
+    const li = el("div"); const sw = el("span", "sw"); sw.style.background = col(b.c);
+    li.append(sw, el("span", null, b.nom), el("span", "mono", pct(tot[b.id])));
+    leg.append(li); parts.push(`${b.nom} ${pct(tot[b.id])}`);
+  });
+  stack.setAttribute("aria-label", "Répartition par famille : " + parts.join(", "));
+
+  // Intervalles de confiance (candidats à 5 % et plus)
+  const ci = document.getElementById("ci"); ci.textContent = "";
+  const list = sorted(h).filter(([, v]) => v >= 5);
+  const sMax = 42;
+  const second = list[1]; const secLow = second[1] - marge(second[1]);
+  list.forEach(([id, v], i) => {
+    const m = marge(v); const c = C[id];
+    const tie = i > 1 && v + marge(v) >= secLow;
+    const row = el("div", "ci-row" + (tie ? " tie" : ""));
+    const name = el("div", "bar-name ci-name", c.nom);
+    const plot = el("div", "ci-plot");
+    [0, 10, 20, 30, 40].forEach(t => { const g = el("div", "ci-grid"); g.style.left = (t / sMax * 100) + "%"; plot.append(g); });
+    const band = el("div", "ci-band"); band.style.left = ((v - m) / sMax * 100) + "%"; band.style.width = (2 * m / sMax * 100) + "%"; band.style.background = col(c.c);
+    const dot = el("div", "ci-dot"); dot.style.left = (v / sMax * 100) + "%"; dot.style.background = col(c.c);
+    plot.append(band, dot);
+    row.append(name, plot, el("div", "ci-val mono", `${fr(v - m)} à ${fr(v + m)}`));
+    row.title = `${c.nom} : ${pct(v)}, fourchette de ${fr(v - m)} à ${pct(v + m)}`;
+    ci.append(row);
+  });
+  const ax = el("div", "ci-row"); ax.style.height = "18px";
+  const axp = el("div", "ci-axis");
+  [0, 10, 20, 30, 40].forEach(t => { const s = el("span", null, t + NB + "%"); s.style.left = (t / sMax * 100) + "%"; axp.append(s); });
+  ax.append(el("div"), axp, el("div", "ci-val", "Fourchette"));
+  ci.append(ax);
+
+  renderRanges();
+}
+
+// Fourchettes d'un scénario à l'autre
+function renderRanges() {
+  const box = document.getElementById("ranges"); box.textContent = "";
+  const sMax = 42;
+  const ids = Object.keys(C).filter(id => H.filter(h => h.s[id] != null).length >= 3);
+  ids.sort((a, b) => Math.max(...H.map(h => h.s[b] ?? 0)) - Math.max(...H.map(h => h.s[a] ?? 0)));
+  ids.forEach(id => {
+    const vals = H.map(h => h.s[id]).filter(v => v != null);
+    const lo = Math.min(...vals), hi = Math.max(...vals); const c = C[id];
+    const row = el("div", "range-row");
+    const plot = el("div", "range-plot");
+    [0, 10, 20, 30, 40].forEach(t => { const g = el("div", "ci-grid"); g.style.left = (t / sMax * 100) + "%"; plot.append(g); });
+    const line = el("div", "range-line"); line.style.left = (lo / sMax * 100) + "%"; line.style.width = ((hi - lo) / sMax * 100) + "%"; line.style.background = col(c.c); line.style.opacity = ".45";
+    plot.append(line);
+    H.forEach((h, i) => {
+      const v = h.s[id]; if (v == null) return;
+      const d = el("div", "range-dot" + (i === sel ? " sel" : ""));
+      d.style.left = (v / sMax * 100) + "%"; d.style.borderColor = col(c.c);
+      if (i === sel) d.style.background = col(c.c);
+      d.title = `${c.nom} · scénario ${i + 1} (${h.court}) : ${pct(v)}`;
+      plot.append(d);
+    });
+    row.append(el("div", "bar-name", c.nom), plot, el("div", "range-val", lo === hi ? pct(lo) : `${fr(lo)}–${pct(hi)}`));
+    box.append(row);
+  });
+  const ax = document.getElementById("rangeAxis"); ax.textContent = "";
+  const wrapRow = el("div", "range-row"); wrapRow.style.height = "18px";
+  const axp = el("div", "ci-axis");
+  [0, 10, 20, 30, 40].forEach(t => { const s = el("span", null, t + NB + "%"); s.style.left = (t / sMax * 100) + "%"; axp.append(s); });
+  wrapRow.append(el("div"), axp, el("div"));
+  ax.append(wrapRow);
+}
+
+// Évolution
+let evoSel = 0;
+const evoChips = document.getElementById("evoChips");
+EVO.forEach((e, i) => {
+  const b = el("button", "chip", e.court); b.type = "button"; b.id = "evo-" + i;
+  b.addEventListener("click", () => { evoSel = i; renderEvo(); });
+  evoChips.append(b);
+});
+
+const SVGNS = "http://www.w3.org/2000/svg";
+const sv = (tag, attrs, txt) => { const e = document.createElementNS(SVGNS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (txt != null) e.textContent = txt; return e; };
+
+function renderEvo() {
+  const e = EVO[evoSel];
+  [...evoChips.children].forEach((b, i) => b.setAttribute("aria-pressed", String(i === evoSel)));
+  document.getElementById("evoTitle").textContent = e.titre;
+  const box = document.getElementById("evoChart"); box.textContent = "";
+  const W = Math.max(300, box.clientWidth);
+  const narrow = W < 560;
+  const Hh = narrow ? 300 : 340;
+  const m = { l: 34, r: narrow ? 118 : 150, t: 12, b: 34 };
+  const iw = W - m.l - m.r, ih = Hh - m.t - m.b;
+  const yMax = 40;
+  const x = i => m.l + (e.dates.length === 1 ? iw / 2 : i * iw / (e.dates.length - 1));
+  const y = v => m.t + ih - v / yMax * ih;
+  const svg = sv("svg", { viewBox: `0 0 ${W} ${Hh}`, height: Hh, role: "img", "aria-label": e.titre });
+  [0, 10, 20, 30, 40].forEach(t => {
+    svg.append(sv("line", { x1: m.l, x2: m.l + iw, y1: y(t), y2: y(t), stroke: "var(--border)", "stroke-width": 1 }));
+    svg.append(sv("text", { x: m.l - 8, y: y(t) + 4, "text-anchor": "end", "font-size": 11, fill: "var(--text-muted)", style: "font-family: var(--font-mono)" }, t + NB + "%"));
+  });
+  e.dates.forEach((d, i) => {
+    if (narrow && i % 2 === 1 && i !== e.dates.length - 1) return;
+    svg.append(sv("text", { x: x(i), y: Hh - 10, "text-anchor": i === e.dates.length - 1 ? "end" : "middle", "font-size": 11, fill: "var(--text-muted)" }, d));
+  });
+  const ids = Object.keys(e.series);
+  ids.forEach(id => {
+    const vals = e.series[id]; const c = C[id];
+    const dPath = vals.map((v, i) => `${i ? "L" : "M"}${x(i)},${y(v)}`).join(" ");
+    const attrs = { d: dPath, fill: "none", stroke: col(c.c), "stroke-width": 2.25, "stroke-linejoin": "round", "stroke-linecap": "round" };
+    if (id === "retailleau") attrs["stroke-dasharray"] = "5 4";
+    svg.append(sv("path", attrs));
+    const last = vals.length - 1;
+    svg.append(sv("circle", { cx: x(last), cy: y(vals[last]), r: 4.5, fill: col(c.c), stroke: "var(--bg-card)", "stroke-width": 2 }));
+  });
+  // Étiquettes directes en bout de courbe, écartées pour éviter les chevauchements
+  const labels = ids.map(id => ({ id, v: e.series[id][e.series[id].length - 1] })).map(o => ({ ...o, y: y(o.v) })).sort((a, b) => a.y - b.y);
+  for (let i = 1; i < labels.length; i++) if (labels[i].y - labels[i - 1].y < 15) labels[i].y = labels[i - 1].y + 15;
+  for (let i = labels.length - 2; i >= 0; i--) if (labels[i + 1].y > m.t + ih && labels[i + 1].y - labels[i].y < 15) labels[i].y = labels[i + 1].y - 15;
+  labels.forEach(o => {
+    const c = C[o.id]; const short = c.nom === "Marine Le Pen" ? "Le Pen" : c.nom.split(" ").slice(-1)[0];
+    const t = sv("text", { x: m.l + iw + 10, y: o.y + 4, "font-size": 12, fill: "var(--text)" });
+    t.append(sv("tspan", { "font-weight": 600, style: "font-family: var(--font-mono)" }, pct(o.v)));
+    t.append(sv("tspan", { dx: 6, fill: "var(--text-secondary)" }, short));
+    svg.append(t);
+  });
+  // Réticule et info-bulle
+  const cross = sv("line", { y1: m.t, y2: m.t + ih, stroke: "var(--border-mid)", "stroke-width": 1, visibility: "hidden" });
+  svg.append(cross);
+  const hit = sv("rect", { x: m.l - 10, y: m.t, width: iw + 20, height: ih, fill: "transparent", tabindex: 0, "aria-label": "Parcourir les vagues avec les flèches" });
+  svg.append(hit);
+  box.append(svg);
+  const tip = el("div", "tip"); tip.hidden = true; box.append(tip);
+  let cur = -1;
+  const show = i => {
+    cur = i; const px = x(i);
+    cross.setAttribute("x1", px); cross.setAttribute("x2", px); cross.setAttribute("visibility", "visible");
+    tip.textContent = ""; tip.append(el("div", "h", e.dates[i]));
+    ids.map(id => [id, e.series[id][i]]).sort((a, b) => b[1] - a[1]).forEach(([id, v]) => {
+      const r = el("div", "r"); const k = el("i"); k.style.background = col(C[id].c);
+      r.append(k, el("b", null, pct(v)), el("span", null, C[id].nom)); tip.append(r);
+    });
+    tip.hidden = false;
+    const tw = tip.offsetWidth;
+    tip.style.left = (px + 14 + tw > W ? px - 14 - tw : px + 14) + "px";
+    tip.style.top = (m.t + 4) + "px";
+  };
+  const hide = () => { cross.setAttribute("visibility", "hidden"); tip.hidden = true; cur = -1; };
+  const near = ev => { const r = svg.getBoundingClientRect(); const px = (ev.clientX - r.left) * (W / r.width); return Math.max(0, Math.min(e.dates.length - 1, Math.round((px - m.l) / (iw / (e.dates.length - 1))))); };
+  hit.addEventListener("pointermove", ev => show(near(ev)));
+  hit.addEventListener("pointerleave", hide);
+  hit.addEventListener("focus", () => show(e.dates.length - 1));
+  hit.addEventListener("blur", hide);
+  hit.addEventListener("keydown", ev => {
+    if (ev.key === "ArrowLeft" || ev.key === "ArrowRight") { ev.preventDefault(); show(Math.max(0, Math.min(e.dates.length - 1, (cur < 0 ? e.dates.length - 1 : cur) + (ev.key === "ArrowLeft" ? -1 : 1)))); }
+  });
+}
+
+// Second tour
+function renderDuels() {
+  const box = document.getElementById("duels"); box.textContent = "";
+  box.append(el("p", "label", "Intentions de vote au second tour · 17-19 octobre 2026"));
+  DUELS.forEach(d => {
+    const c = C[d.id]; const lpv = 100 - d.oct;
+    const wrap = el("div", "duel");
+    const top = el("div", "duel-top");
+    top.append(el("span", "who", "Marine Le Pen"), el("span", "who", c.nom));
+    const bar = el("div", "duel-bar"); bar.setAttribute("role", "img"); bar.setAttribute("aria-label", `Marine Le Pen ${pct(lpv)}, ${c.nom} ${pct(d.oct)}`);
+    const a = el("div", null, pct(lpv)); a.style.flex = `0 0 calc(${lpv}% - 1px)`; a.style.background = col("--c-rn");
+    const b = el("div", null, pct(d.oct)); b.style.flex = `0 0 calc(${d.oct}% - 1px)`; b.style.background = col(c.c); b.style.justifyContent = "flex-end";
+    const mid = el("div", "mid");
+    bar.append(a, b, mid);
+    const meta = el("div", "duel-meta");
+    const diff = d.oct - d.aout;
+    const ev = el("span"); ev.append(document.createTextNode("Évolution du challenger depuis août : "), el("span", diff < 0 ? "trend-down" : "trend-up", `${diff < 0 ? "▼ " : "▲ "}${diff > 0 ? "+" : ""}${fr(diff)}${NB}pts`));
+    const hist = el("span", null, `Écart : ${fr(lpv - d.oct)}${NB}pts` + (d.juil ? ` · juillet ${fr(100 - d.juil)} / ${fr(d.juil)}` : "") + ` · août ${fr(100 - d.aout)} / ${fr(d.aout)}`);
+    meta.append(ev, hist);
+    wrap.append(top, bar, meta);
+    box.append(wrap);
+  });
+}
+
+renderPremierTour();
+renderEvo();
+renderDuels();
+let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(renderEvo, 120); });
+</script>
+</body>
+</html>
