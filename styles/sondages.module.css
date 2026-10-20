@@ -1,0 +1,101 @@
+.root {
+  /* Fonds */
+  --bg: #FAFAF8;
+  --bg-card: #FFFFFF;
+  --bg-sidebar: #F2F2EE;
+  --bg-hover: #EEEEE9;
+  /* Bordures */
+  --border: #DDDDD6;
+  --border-mid: #B8B8B0;
+  --border-dark: #2B2B2B;
+  /* Texte */
+  --text: #1A1A1A;
+  --text-secondary: #595959;
+  --text-muted: #9A9A92;
+  /* Accents */
+  --accent: #1B3F7B;
+  --accent-light: #EEF2FA;
+  --red: #B01E28;
+  --red-light: #FAF0F1;
+  --green-leg: #1A7A4C;
+  --green-light: #EDFAF3;
+  --amber-com: #C27F20;
+  --amber-light: #FFF8ED;
+  /* Typographie */
+  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.sectionLabel {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.h2 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 4px 0 16px;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+.link {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.btnSecondary {
+  background: transparent;
+  border: 1px solid var(--border-mid);
+  border-radius: 2px;
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.btnSecondary:hover {
+  border-color: var(--text);
+  color: var(--text);
+}
+
+.btnActive {
+  background: var(--accent-light);
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
