@@ -7,7 +7,11 @@ Page éditoriale interactive consacrée aux permis de construire délivrés à N
 - `index.html` : la page complète (styles, données et scripts intégrés). La police Barlow vient de Google Fonts et la bibliothèque de cartes Leaflet 1.9.4 de cdnjs.
 - `tiles/` : le fond de carte Plan IGN (© IGN, licence ouverte Etalab 2.0), téléchargé depuis la Géoplateforme pour la commune et ses abords, niveaux de zoom 12 à 17, assemblé en blocs de 4 × 4 tuiles (images WebP de 1 024 px, chemin `tiles/{z-2}/{x}/{y}.webp`).
 
-## Version publiée
+## Site en ligne
+
+https://dix-ans-de-beton-nlg.vercel.app (projet Vercel « dix-ans-de-beton-nlg », publié depuis ce dossier ; les dossiers et fichiers listés dans `.vercelignore` ne sont pas publiés).
+
+## Version de travail (Claude)
 
 https://claude.ai/artifact/YPdH3GHVLVatu8PHGiZy4r
 
