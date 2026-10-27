@@ -510,6 +510,8 @@ function applyView(){
   drawScale(); sizeLegend();
 }
 map.on('zoomend', applyView);
+// Pendant l'animation, le calque est agrandi d'un bloc : on lui donne d'avance la taille finale divisée par cet agrandissement
+map.on('zoomanim', e => { const sc = map.getZoomScale(e.zoom, map.getZoom()); nodes.forEach(({d, m}) => m.setRadius(rad(d.l, e.zoom) / sc)); });
 map.on('move', drawScale);
 map.on('movestart zoomstart', unhover);
 map.on('click', unhover);
@@ -590,6 +592,7 @@ function renderList(){
   list.hidden = false; addr.setAttribute('aria-expanded', 'true');
   if (active >= 0) { addr.setAttribute('aria-activedescendant', 'opt' + active); document.getElementById('opt' + active).scrollIntoView({block:'nearest'}); }
 }
+addr.addEventListener('focus', () => { if (touchy) setTimeout(() => document.getElementById('finder').scrollIntoView({behavior: REDUCED ? 'auto' : 'smooth', block: 'start'}), 250); });
 addr.addEventListener('input', () => {
   clearBtn.hidden = !addr.value;
   if (norm(addr.value).length < 2) { opts = []; closeList(); return; }
@@ -614,7 +617,11 @@ document.querySelectorAll('[aria-labelledby="lbl-rayon"] button').forEach(b => b
   else refresh();
 }));
 
-function pick(o){ addr.value = o.label; clearBtn.hidden = false; closeList(); setHome(o); addr.blur(); }
+function pick(o){
+  addr.value = o.label; clearBtn.hidden = false; closeList(); addr.blur(); setHome(o);
+  // On attend que le clavier du téléphone se referme, puis on amène la carte entière à l'écran
+  setTimeout(() => { const r = mapbox.getBoundingClientRect(); if (r.top < 0 || r.bottom > innerHeight) mapbox.scrollIntoView({behavior: REDUCED ? 'auto' : 'smooth', block: 'start'}); }, 300);
+}
 function setHome(o, instant){
   try { if (o) localStorage.setItem('beton-adresse', JSON.stringify({label: o.label, x: o.x, y: o.y, note: o.note})); else localStorage.removeItem('beton-adresse'); } catch (_) {}
   home = o ? Object.assign({}, o, {ll: toLL(o.x, o.y)}) : null;
@@ -623,7 +630,7 @@ function setHome(o, instant){
     L.circle(home.ll, {radius, className: 'ring', interactive: false}).addTo(ringLayer);
     L.circleMarker(home.ll, {radius: 7, className: 'youdot', interactive: false}).addTo(ringLayer);
     const b = home.ll.toBounds(radius * 2.5);
-    if (instant || REDUCED) map.fitBounds(b, {animate: false}); else map.flyToBounds(b, {duration: 0.9});
+    map.fitBounds(b, {animate: !instant && !REDUCED});
   } else fitCity(true);
   refresh();
 }
@@ -652,7 +659,7 @@ function renderNear(){
       const nl = document.createElement('span'); nl.className = 'nl'; nl.textContent = fmt(d.l) + ' log.';
       const nm = document.createElement('span'); nm.className = 'nm'; nm.textContent = 'À ' + fdist(dist(d)) + ' · ' + fmonth(d.d) + ' · ' + TYPES[d.t] + (d.p ? ' : ' + d.p : '');
       b.append(dot, na, nl, nm);
-      b.addEventListener('click', () => { const n = nodes.find(x => x.d === d); select(n, false); map.once('moveend', () => select(n, true)); map.flyTo(d.ll, Math.max(map.getZoom(), 16.5), {duration: REDUCED ? 0 : 0.6}); });
+      b.addEventListener('click', () => { const n = nodes.find(x => x.d === d); select(n, false); map.once('moveend', () => select(n, true)); map.setView(d.ll, Math.max(map.getZoom(), 16.5), {animate: !REDUCED}); });
       li.append(b); ul.append(li);
     });
     box.append(ul);
