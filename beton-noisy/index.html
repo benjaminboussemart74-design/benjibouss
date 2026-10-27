@@ -107,8 +107,6 @@ table{border-collapse:collapse; width:100%; font-size:15px; min-width:720px}
 th,td{text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top}
 th{font-weight:800; font-size:13px; letter-spacing:.05em; text-transform:uppercase}
 td.n{text-align:right; font-variant-numeric:tabular-nums}
-.method{background:var(--soft)}
-.method ul{margin:0; padding-left:20px; display:grid; gap:10px; max-width:75ch; color:var(--muted)}
 footer{border-top:3px solid var(--ink)}
 footer .wrap{padding-block:28px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:16px; font-size:15px; color:var(--muted)}
 @media (max-width:860px){
@@ -196,7 +194,6 @@ footer .wrap{padding-block:28px; display:flex; flex-wrap:wrap; justify-content:s
       <a href="#carte">La carte</a>
       <a href="#annees">Année par année</a>
       <a href="#depuis2026">Depuis mars 2026</a>
-      <a href="#methode">Sources</a>
     </nav>
   </div>
 </header>
@@ -329,20 +326,6 @@ footer .wrap{padding-block:28px; display:flex; flex-wrap:wrap; justify-content:s
   </div>
 </section>
 
-<section id="methode" class="method">
-  <div class="wrap">
-    <div class="sec-head"><h2>Sources et méthode</h2></div>
-    <ul>
-      <li>Permis délivrés entre 2015 et 2026 : fichier de suivi des permis de construire de la Ville de Noisy-le-Grand (export du 10 juillet 2026). Ce fichier ne recense que les permis accordés et n’est pas exhaustif : les chiffres présentés sont des minimums.</li>
-      <li>Décisions depuis mars 2026 : liste des autorisations d’urbanisme du service droit des sols, du 24 mars au 15 octobre 2026.</li>
-      <li>Un immeuble collectif s’entend ici de tout permis comptant 3 logements ou plus. Les permis modificatifs et les transferts ne sont pas comptés comme de nouveaux permis.</li>
-      <li>Localisation : parcelle cadastrale ou adresse, géolocalisée avec les services de l’IGN. Trois permis situés à l’angle de deux rues sont placés à leur intersection. Les permis de l’écoquartier de l’Île de la Marne sont placés sur leur lot d’après le plan de l’aménageur (SOCAREN). Pour 10 permis dont l’adresse ne comporte pas de numéro de rue, la position est approchée ; un permis n’a aucune adresse dans le fichier de la Ville et est placé sur sa parcelle.</li>
-      <li>Recherche d’adresse : Base adresse nationale (10 409 adresses de Noisy-le-Grand, via la Géoplateforme de l’IGN), recalée sur le fond de carte. La position est précise à une vingtaine de mètres près ; la recherche fonctionne sans envoyer votre adresse à aucun service.</li>
-      <li>Fond de carte : Plan IGN, © IGN, licence ouverte Etalab 2.0 (Géoplateforme). Carte interactive réalisée avec Leaflet.</li>
-      <li>Le nom du demandeur n’est indiqué que pour les sociétés et les bailleurs, jamais pour les particuliers.</li>
-    </ul>
-  </div>
-</section>
 </main>
 
 <footer>
