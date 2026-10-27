@@ -93,29 +93,18 @@ select{font:inherit; font-size:16px; padding:10px 12px; min-height:44px; border-
 .chart svg{display:block; width:100%; min-width:560px; height:auto}
 .chart text{fill:var(--ink); font-family:var(--f)}
 .chart .ax{stroke:var(--line)}
-/* Comparaison des deux débuts de mandat : une frise de sept mois par mandat */
-.tl{display:grid; gap:40px}
-.tl-row{display:grid; grid-template-columns:240px minmax(0,1fr); gap:32px; align-items:start; border-top:3px solid var(--ink); padding-top:22px}
-.tl-fig{display:flex; flex-direction:column; gap:6px}
-.tl-fig em{font-style:normal; font-size:14px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--muted)}
-.tl-fig b{font-size:clamp(72px, 9vw, 112px); font-weight:800; line-height:.9; letter-spacing:-.02em; font-variant-numeric:tabular-nums}
-.tl-row.was .tl-fig b{color:var(--canard)}
-.tl-fig span{font-size:19px; font-weight:600; line-height:1.25}
-.tl-body{display:flex; flex-direction:column; gap:14px; min-width:0}
-.tl-track{position:relative; height:116px; margin-inline:14px}
-.tl-track::before{content:""; position:absolute; left:0; right:0; top:78px; border-top:2px solid var(--ink)}
-.tl-track.empty::before{right:calc(100% - var(--end) * 1%); border-top:2px dashed var(--muted)}
-.tl-ticks{list-style:none; margin:0; padding:0}
-.tl-ticks li{position:absolute; top:78px; left:calc(var(--p) * 1%); transform:translateX(-50%); padding-top:12px; font-size:13px; color:var(--muted); white-space:nowrap}
-.tl-ticks li::before{content:""; position:absolute; top:-6px; left:50%; height:12px; border-left:1.5px solid var(--muted)}
-.tl-ticks li:first-child{transform:none}
-.tl-ticks li:first-child::before{left:0}
-.tl-ev::after{content:""; position:absolute; left:50%; bottom:-4px; height:4px; border-left:2px solid var(--canard)}
-.tl-ev{position:absolute; top:76px; left:calc(var(--p) * 1%); width:var(--d); height:var(--d); transform:translate(-50%, -100%); border-radius:50%; background:var(--canard); border:2px solid var(--bg); display:grid; place-items:center; color:#fff; font-size:14px; font-weight:800; font-variant-numeric:tabular-nums}
-.tl-list{list-style:none; margin:0; padding:0; display:grid; gap:6px; font-size:17px; color:var(--muted)}
-.tl-list b{color:var(--ink); font-weight:800}
-.tl-row.now .tl-list li:first-child{color:var(--ink); font-weight:600}
-.tl-src{margin-top:28px; font-size:14px; color:var(--muted); max-width:75ch}
+/* Comparaison : ce qu'aurait donné le rythme précédent, face à la réalité */
+.cf{display:grid; gap:22px; border-top:3px solid var(--ink); padding-top:24px; max-width:900px}
+.cf-lead{font-size:clamp(20px, 2.4vw, 26px); font-weight:600; line-height:1.3; max-width:34ch}
+.cf-num{display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 18px; line-height:1}
+.cf-num b{font-size:clamp(96px, 15vw, 180px); font-weight:800; letter-spacing:-.03em; color:var(--canard); font-variant-numeric:tabular-nums}
+.cf-num span{font-size:clamp(22px, 2.6vw, 30px); font-weight:800}
+.cf-bars{display:grid; gap:12px}
+.cf-bar{display:grid; grid-template-columns:minmax(0, 260px) minmax(0, 1fr) 56px; gap:14px; align-items:center; font-size:16px}
+.cf-bar i{display:block; height:22px; width:var(--w); min-width:3px; background:var(--canard); border-radius:2px}
+.cf-bar.now i{background:var(--ink)}
+.cf-bar b{font-size:22px; font-weight:800; text-align:right; font-variant-numeric:tabular-nums}
+.cf-src{font-size:15px; color:var(--muted); max-width:75ch}
 .note{margin-top:28px; font-size:18px; max-width:65ch}
 details{border-top:1px solid var(--line); padding-top:14px}
 summary{cursor:pointer; font-weight:800; font-size:18px; min-height:44px; display:flex; align-items:center}
@@ -130,9 +119,8 @@ footer .wrap{padding-block:28px; display:flex; flex-wrap:wrap; justify-content:s
   .mapgrid{grid-template-columns:minmax(0,1fr); grid-template-areas:"left" "map" "right"}
   .mapbox svg{min-height:0}
   .figs .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .tl-row{grid-template-columns:minmax(0,1fr); gap:16px}
-  .tl-track{margin-inline:6px}
-  .tl-ticks li{font-size:12px}
+  .cf-bar{grid-template-columns:minmax(0,1fr) 48px; row-gap:6px}
+  .cf-lab{grid-column:1 / -1}
   section{padding-block:44px}
 }
 /* Recherche d'adresse */
@@ -328,53 +316,16 @@ footer .wrap{padding-block:28px; display:flex; flex-wrap:wrap; justify-content:s
   <div class="wrap">
     <div class="sec-head">
       <h2>Depuis mars 2026, on arrête de bétonner</h2>
-      <p>Les sept premiers mois de chaque mandat, côte à côte. Chaque cercle est un immeuble autorisé ; sa taille dépend du nombre de logements.</p>
     </div>
-    <div class="tl">
-      <div class="tl-row was">
-        <div class="tl-fig"><em>Juillet 2020 – janvier 2021</em><b>145</b><span>logements autorisés en immeubles</span></div>
-        <div class="tl-body">
-          <div class="tl-track" role="img" aria-label="Juillet 2020 à janvier 2021 : deux immeubles autorisés, 110 logements le 25 septembre 2020 et 35 logements le 10 novembre 2020">
-            <ol class="tl-ticks" aria-hidden="true">
-            <li style="--p:0">4 juil.</li>
-            <li style="--p:13.1">août</li>
-            <li style="--p:27.6">sept.</li>
-            <li style="--p:41.6">oct.</li>
-            <li style="--p:56.1">nov.</li>
-            <li style="--p:70.1">déc.</li>
-            <li style="--p:84.6">janv.</li>
-            </ol>
-            <span class="tl-ev" style="--p:38.8; --d:63px" aria-hidden="true">110</span>
-            <span class="tl-ev" style="--p:60.3; --d:35px" aria-hidden="true">35</span>
-          </div>
-          <ul class="tl-list">
-            <li><b>25 sept. 2020</b> · 110 logements · Bas-Heurts, rue Daniel-Perdrigé · Atland</li>
-            <li><b>10 nov. 2020</b> · 35 logements · écoquartier de l’Île de la Marne · Demathieu et Bard</li>
-          </ul>
-        </div>
+    <div class="cf">
+      <p class="cf-lead">Si la nouvelle municipalité avait accordé des permis au même rythme que l’équipe précédente, Noisy-le-Grand compterait, au 15 octobre 2026,</p>
+      <p class="cf-num"><b>306</b> <span>logements de plus autorisés</span></p>
+      <div class="cf-bars" role="img" aria-label="Du 22 mars au 15 octobre 2026 : 306 logements au rythme de l’équipe précédente, 0 logement en immeuble autorisé en réalité">
+        <div class="cf-bar was"><span class="cf-lab">Au rythme de l’équipe précédente</span><i style="--w:100%"></i><b>306</b></div>
+        <div class="cf-bar now"><span class="cf-lab">Depuis le 22 mars 2026</span><i style="--w:0%"></i><b>0</b></div>
       </div>
-      <div class="tl-row now">
-        <div class="tl-fig"><em>Mars – octobre 2026</em><b>0</b><span>nouvel immeuble autorisé</span></div>
-        <div class="tl-body">
-          <div class="tl-track empty" role="img" aria-label="Mars à octobre 2026 : aucun immeuble autorisé" style="--end:96.7">
-            <ol class="tl-ticks" aria-hidden="true">
-            <li style="--p:0">22 mars</li>
-                        <li style="--p:18.7">mai</li>
-            <li style="--p:33.2">juin</li>
-            <li style="--p:47.2">juil.</li>
-            <li style="--p:61.7">août</li>
-            <li style="--p:76.2">sept.</li>
-            <li style="--p:90.2">oct.</li>
-            </ol>
-          </div>
-          <ul class="tl-list">
-            <li>Aucun permis d’immeuble collectif accordé depuis l’installation de la nouvelle équipe.</li>
-            <li>Plusieurs projets refusés, dont un immeuble de 60 logements rue de Malnoue.</li>
-          </ul>
-        </div>
-      </div>
+      <p class="cf-src">Calcul : de juillet 2020 à mars 2026, 3 088 logements ont été autorisés en immeubles, soit 45 par mois. Sur les 207 jours écoulés du 22 mars au 15 octobre 2026, ce rythme aurait donné 306 logements. Aucun permis d’immeuble collectif n’a été accordé sur cette période ; plusieurs projets ont été refusés, dont un immeuble de 60 logements rue de Malnoue.</p>
     </div>
-    <p class="tl-src">Permis de 3 logements ou plus. Sources : fichier des permis de la Ville et base Sitadel de l’État ; pour 2026, autorisations d’urbanisme délivrées jusqu’au 15 octobre.</p>
   </div>
 </section>
 
